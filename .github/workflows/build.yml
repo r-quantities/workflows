@@ -7,8 +7,6 @@ jobs:
     if: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
     runs-on: ${{ matrix.config.os }}
     name: check on ${{ matrix.config.os }} (${{ matrix.config.r }}
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
 
     strategy:
       fail-fast: false
