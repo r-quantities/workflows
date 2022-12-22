@@ -42,9 +42,10 @@ jobs:
     - name: Add Remotes
       run: |
         PKG="r-quantities/errorsr-quantities/units"
-        PKG=$(echo $PKG | sed 's|$GITHUB_REPOSITORY||')
+        PKG=$(echo $PKG | sed "s|$GITHUB_REPOSITORY||")
         REMOTES="Remotes: $GITHUB_REPOSITORY@$GITHUB_SHA"
-        [ $CHECK_VERSION = "cran" ] && git checkout $(git tag | tail -n1) \
+        [ $CHECK_VERSION = "cran" ] \
+          && git checkout $(git tag | tail -n1) \
           || REMOTES="$REMOTES, $PKG"
         echo $REMOTES >> DESCRIPTION
 
