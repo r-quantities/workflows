@@ -14,7 +14,7 @@ jobs:
         include:
         - {os: macOS-latest, r: 'release'}
         - {os: windows-latest, r: 'release'}
-        #- {os: ubuntu-latest, r: 'devel', http-user-agent: 'release'}
+        - {os: ubuntu-latest, r: 'devel', http-user-agent: 'release'}
         - {os: ubuntu-latest, r: 'release', covr: 'yes'}
         - {os: ubuntu-latest, r: 'oldrel'}
 
@@ -49,7 +49,7 @@ jobs:
     - name: Install package dependencies
       uses: r-lib/actions/setup-r-dependencies@v2
       with:
-        extra-packages: any::rcmdcheck, any::covr
+        extra-packages: any::rcmdcheck, any::covr, vdiffr@1.0.5
         needs: check, coverage
 
     - name: Check
