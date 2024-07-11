@@ -1,22 +1,17 @@
-on:
-  workflow_call:
-    inputs:
-      version:
-        description: cran or devel
-        type: string
-        required: true
+on: workflow_call
 
 name: build
 
 jobs:
   quantities:
     runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ inputs.version == 'cran' }}
-    name: quantities (${{ inputs.version }}) on ${{ matrix.os }} (${{ matrix.r }})
+    continue-on-error: ${{ matrix.version == 'cran' }}
+    name: quantities (${{ matrix.version }}) on ${{ matrix.os }} (${{ matrix.r }})
 
     strategy:
       fail-fast: false
       matrix:
+        version: [cran, devel]
         include:
         - {os: ubuntu-latest, r: 'devel', http-user-agent: 'release'}
         - {os: ubuntu-latest, r: 'release'}
@@ -26,7 +21,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
       _R_CHECK_CRAN_INCOMING_REMOTE_: false
-      CHECK_VERSION: ${{ inputs.version }}
+      CHECK_VERSION: ${{ matrix.version }}
 
     steps:
     - uses: actions/checkout@v4
