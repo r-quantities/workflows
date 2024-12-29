@@ -36,7 +36,10 @@ jobs:
 
     - name: Install macOS dependencies
       if: ${{ runner.os == 'macOS' }}
-      run: brew install automake udunits
+      run: |
+        brew install automake udunits
+        echo "UDUNITS2_INCLUDE=/opt/homebrew/Cellar/udunits/2.2.28/include" >> $GITHUB_ENV
+        echo "UDUNITS2_LIBS=/opt/homebrew/Cellar/udunits/2.2.28/lib" >> $GITHUB_ENV
 
     - name: Install Windows dependencies
       if: ${{ runner.os == 'Windows' }}
