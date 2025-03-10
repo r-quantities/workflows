@@ -12,8 +12,8 @@ jobs:
       fail-fast: false
       matrix:
         version: [cran, devel]
-        os: ubuntu-latest
-        r: ['devel', 'release', 'oldrel']
+        os: [ubuntu-latest]
+        r: [devel, release, oldrel]
         include:
         - r: devel
           http-user-agent: 'release'
