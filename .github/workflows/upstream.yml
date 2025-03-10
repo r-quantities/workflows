@@ -12,10 +12,11 @@ jobs:
       fail-fast: false
       matrix:
         version: [cran, devel]
+        os: ubuntu-latest
+        r: ['devel', 'release', 'oldrel']
         include:
-        - {os: ubuntu-latest, r: 'devel', http-user-agent: 'release'}
-        - {os: ubuntu-latest, r: 'release'}
-        - {os: ubuntu-latest, r: 'oldrel'}
+        - r: devel
+          http-user-agent: 'release'
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
